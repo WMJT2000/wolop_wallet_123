@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FAF4EE"
+    tools:context=".Screens.Login">
+
+    <ImageView
+        android:id="@+id/imgFondo"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:src="@drawable/fondo_principal"
+        android:scaleType="centerCrop"
+        android:contentDescription="@null"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollLogin"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        android:clipToPadding="false"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <LinearLayout
+            android:id="@+id/contenedorPrincipal"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center_horizontal">
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.38" />
+
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="210dp"
+                android:layout_height="145dp"
+                android:src="@drawable/icon_principal"
+                android:scaleType="fitCenter"
+                android:contentDescription="GEMMA Alta Pasticceria Italiana" />
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.47" />
+
+            <TextView
+                android:id="@+id/txtFrase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="12dp"
+                android:layout_marginEnd="12dp"
+                android:text="La dolce experiencia"
+                android:textColor="#573628"
+                android:textSize="25sp"
+                android:textStyle="italic"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:includeFontPadding="false" />
+
+            <LinearLayout
+                android:id="@+id/contenedorDecoracion"
+                android:layout_width="wrap_content"
+                android:layout_height="30dp"
+                android:layout_marginTop="9dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="1dp"
+                    android:background="#B98532" />
+
+                <TextView
+                    android:id="@+id/txtEstrella"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="11dp"
+                    android:layout_marginEnd="11dp"
+                    android:text="✦"
+                    android:textSize="24sp"
+                    android:textColor="#B98532"
+                    android:gravity="center"
+                    android:includeFontPadding="false" />
+
+                <View
+                    android:layout_width="65dp"
+                    android:layout_height="1dp"
+                    android:background="#B98532" />
+
+            </LinearLayout>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="0.43" />
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="30dp"
+                android:layout_marginEnd="30dp"
+                app:cardBackgroundColor="#F8F4F0"
+                app:cardCornerRadius="24dp"
+                app:cardElevation="8dp"
+                app:strokeColor="#FFFFFF"
+                app:strokeWidth="1dp"
+                app:cardUseCompatPadding="false">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:gravity="center_horizontal"
+                    android:paddingStart="16dp"
+                    android:paddingEnd="16dp"
+                    android:paddingTop="22dp"
+                    android:paddingBottom="20dp">
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutCorreo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        app:boxBackgroundMode="outline"
+                        app:boxBackgroundColor="#00FFFFFF"
+                        app:boxStrokeColor="#D3BFB3"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/icon_email_input"
+                        app:startIconTint="#A6792C"
+                        app:startIconContentDescription="Correo electrónico">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtCorreo"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:hint="Correo electrónico"
+                            android:inputType="textEmailAddress"
+                            android:singleLine="true"
+                            android:textColor="#513629"
+                            android:textColorHint="#654638"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="8dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:id="@+id/layoutContrasena"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        app:boxBackgroundMode="outline"
+                        app:boxBackgroundColor="#00FFFFFF"
+                        app:boxStrokeColor="#D3BFB3"
+                        app:boxStrokeWidth="1dp"
+                        app:boxStrokeWidthFocused="1dp"
+                        app:boxCornerRadiusTopStart="15dp"
+                        app:boxCornerRadiusTopEnd="15dp"
+                        app:boxCornerRadiusBottomStart="15dp"
+                        app:boxCornerRadiusBottomEnd="15dp"
+                        app:hintEnabled="false"
+                        app:startIconDrawable="@drawable/icon_password_input"
+                        app:startIconTint="#A6792C"
+                        app:endIconMode="password_toggle"
+                        app:endIconTint="#A6792C">
+
+                        <com.google.android.material.textfield.TextInputEditText
+                            android:id="@+id/edtContrasena"
+                            android:layout_width="match_parent"
+                            android:layout_height="52dp"
+                            android:hint="Contraseña"
+                            android:inputType="textPassword"
+                            android:singleLine="true"
+                            android:textColor="#513629"
+                            android:textColorHint="#654638"
+                            android:textSize="15sp"
+                            android:fontFamily="sans-serif"
+                            android:paddingStart="4dp"
+                            android:paddingEnd="4dp" />
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnEntrar"
+                        android:layout_width="match_parent"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="19dp"
+                        android:text="ENTRAR"
+                        android:textAllCaps="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="16sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08"
+                        android:gravity="center"
+                        android:elevation="0dp"
+                        android:stateListAnimator="@null"
+                        app:backgroundTint="#674130"
+                        app:cornerRadius="35dp"
+                        app:strokeWidth="0dp" />
+
+                    <TextView
+                        android:id="@+id/txtOlvideContrasena"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="11dp"
+                        android:paddingTop="4dp"
+                        android:paddingBottom="4dp"
+                        android:text="¿Olvidaste tu contraseña?"
+                        android:textColor="#563729"
+                        android:textSize="14sp"
+                        android:fontFamily="sans-serif"
+                        android:gravity="center"
+                        android:includeFontPadding="false"
+                        android:clickable="true"
+                        android:focusable="true" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/btnCrearCuenta"
+                        android:layout_width="match_parent"
+                        android:layout_height="49dp"
+                        android:layout_marginTop="18dp"
+                        android:text="CREAR CUENTA"
+                        android:textAllCaps="true"
+                        android:textColor="#B58531"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:fontFamily="sans-serif-medium"
+                        android:letterSpacing="0.08"
+                        android:gravity="center"
+                        android:elevation="0dp"
+                        android:stateListAnimator="@null"
+                        app:backgroundTint="#00FFFFFF"
+                        app:cornerRadius="35dp"
+                        app:strokeColor="#B98532"
+                        app:strokeWidth="1dp" />
+
+                </LinearLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <Space
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.0"
+                android:minHeight="25dp" />
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

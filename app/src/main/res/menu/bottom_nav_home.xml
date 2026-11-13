@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/nav_inicio"
+        android:icon="@drawable/icon_navigation_home"
+        android:title="Inicio" />
+    <item
+        android:id="@+id/nav_beneficios"
+        android:icon="@drawable/icon_navigation_benefits"
+        android:title="Beneficios" />
+    <item
+        android:id="@+id/nav_qr"
+        android:icon="@drawable/icon_navigation_qr"
+        android:title="QR" />
+    <item
+        android:id="@+id/nav_menu"
+        android:icon="@drawable/icon_navigation_menu"
+        android:title="Menú" />
+    <item
+        android:id="@+id/nav_perfil"
+        android:icon="@drawable/icon_navigation_profile"
+        android:title="Perfil" />
+</menu>
