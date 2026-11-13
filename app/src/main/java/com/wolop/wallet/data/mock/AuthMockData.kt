@@ -1,4 +1,4 @@
-package com.wolop.wallet.data
+package com.wolop.wallet.data.mock
 
 // Cuenta de prueba: no hay backend, el login se valida contra estos valores.
 object AuthMockData {

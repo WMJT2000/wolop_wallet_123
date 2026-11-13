@@ -13,7 +13,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.progressindicator.LinearProgressIndicator
 import com.wolop.wallet.Adapters.Home.CreationsAdapter
 import com.wolop.wallet.R
-import com.wolop.wallet.data.HomeMockData
+import com.wolop.wallet.data.mock.HomeMockData
 import com.wolop.wallet.data.session.SessionManager
 import java.util.Locale
 import kotlin.math.roundToInt

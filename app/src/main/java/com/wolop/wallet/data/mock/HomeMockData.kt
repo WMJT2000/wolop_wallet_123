@@ -1,4 +1,4 @@
-package com.wolop.wallet.data
+package com.wolop.wallet.data.mock
 
 import com.wolop.wallet.R
 import com.wolop.wallet.data.local.entities.Usuario

@@ -12,7 +12,7 @@ class Welcome : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.welcome_screen)
+        setContentView(R.layout.screen_welcome)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -20,7 +20,7 @@ class Welcome : AppCompatActivity() {
         }
 
         findViewById<android.view.View>(R.id.btnEntrar).setOnClickListener {
-            startActivity(Intent(this, Login::class.java))
+            startActivity(Intent(this, Introduction::class.java))
         }
 
         findViewById<android.view.View>(R.id.btnCrearCuenta).setOnClickListener {

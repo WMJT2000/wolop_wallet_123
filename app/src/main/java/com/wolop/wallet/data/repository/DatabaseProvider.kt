@@ -1,9 +1,8 @@
 
-package com.wolop.wallet.data
+package com.wolop.wallet.data.repository
 
 import android.content.Context
 import com.wolop.wallet.data.local.AppDatabase
-import com.wolop.wallet.data.repository.UsuarioRepository
 
 object DatabaseProvider {
 

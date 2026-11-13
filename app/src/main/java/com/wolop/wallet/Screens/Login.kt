@@ -12,8 +12,8 @@ import androidx.lifecycle.lifecycleScope
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.wolop.wallet.R
-import com.wolop.wallet.data.AuthMockData
-import com.wolop.wallet.data.DatabaseProvider
+import com.wolop.wallet.data.mock.AuthMockData
+import com.wolop.wallet.data.repository.DatabaseProvider
 import com.wolop.wallet.data.local.entities.Usuario
 import com.wolop.wallet.data.session.SessionManager
 import com.wolop.wallet.screens.home.HomeActivity
@@ -25,7 +25,7 @@ class Login : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.login_screen)
+        setContentView(R.layout.screen_login)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)

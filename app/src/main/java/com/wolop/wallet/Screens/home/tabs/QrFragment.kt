@@ -10,7 +10,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.wolop.wallet.R
-import com.wolop.wallet.data.HomeMockData
+import com.wolop.wallet.data.mock.HomeMockData
 import com.wolop.wallet.data.qr.QRConfig
 import com.wolop.wallet.data.qr.QRGenerator
 import com.wolop.wallet.data.qr.QRStyle

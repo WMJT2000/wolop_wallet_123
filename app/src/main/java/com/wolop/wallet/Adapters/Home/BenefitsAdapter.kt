@@ -8,7 +8,7 @@ import android.widget.TextView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.RecyclerView
 import com.wolop.wallet.R
-import com.wolop.wallet.data.Benefit
+import com.wolop.wallet.data.mock.Benefit
 
 class BenefitsAdapter(
     private val onCanjear: (Benefit) -> Unit
@@ -24,7 +24,7 @@ class BenefitsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BenefitViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_benefit, parent, false)
+            .inflate(R.layout.item_beneficio, parent, false)
         return BenefitViewHolder(view)
     }
 

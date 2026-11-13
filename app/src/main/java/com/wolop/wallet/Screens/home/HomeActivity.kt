@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.wolop.wallet.R
 import com.wolop.wallet.data.session.SessionManager
 import com.wolop.wallet.screens.Welcome
@@ -67,20 +68,46 @@ class HomeActivity : AppCompatActivity() {
         updateNavigationSelection()
 
         onBackPressedDispatcher.addCallback(this) {
-            if (selectedNavId != R.id.navInicio) {
-                selectNav(R.id.navInicio)
-            } else {
-                isEnabled = false
-                onBackPressedDispatcher.onBackPressed()
+            when {
+                supportFragmentManager.backStackEntryCount > 0 ->
+                    supportFragmentManager.popBackStack()
+
+                selectedNavId != R.id.navInicio -> selectNav(R.id.navInicio)
+
+                else -> {
+                    isEnabled = false
+                    onBackPressedDispatcher.onBackPressed()
+                }
             }
         }
     }
 
     private fun selectNav(navId: Int) {
-        if (selectedNavId == navId) return
+        if (selectedNavId == navId) {
+            // Si estamos en una sub-pantalla (ej. Tarjeta desde Menú), volver a la tab.
+            clearSubScreens()
+            return
+        }
         selectedNavId = navId
         updateNavigationSelection()
+        clearSubScreens()
         openTab(createFragment(navId))
+    }
+
+    private fun clearSubScreens() {
+        if (supportFragmentManager.backStackEntryCount > 0) {
+            supportFragmentManager.popBackStackImmediate(
+                null,
+                FragmentManager.POP_BACK_STACK_INCLUSIVE
+            )
+        }
+    }
+
+    internal fun abrirSubPantalla(fragment: Fragment) {
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.homeFragmentContainer, fragment)
+            .addToBackStack(fragment::class.java.name)
+            .commit()
     }
 
     private fun updateNavigationSelection() {

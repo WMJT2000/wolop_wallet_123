@@ -12,7 +12,6 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
 import com.wolop.wallet.Adapters.Introduction.IntroductionAdapter
 import com.wolop.wallet.R
-import com.wolop.wallet.screens.home.HomeActivity
 
 class Introduction : AppCompatActivity() {
 
@@ -22,7 +21,7 @@ class Introduction : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.introduction_screen)
+        setContentView(R.layout.screen_introduction)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
@@ -30,7 +29,7 @@ class Introduction : AppCompatActivity() {
         }
 
         if (banners.isEmpty()) {
-            goToHome()
+            goToLogin()
             return
         }
 
@@ -68,11 +67,11 @@ class Introduction : AppCompatActivity() {
             if (next < banners.size) {
                 viewPager.currentItem = next
             } else {
-                goToHome()
+                goToLogin()
             }
         }
 
-        btnSaltar.setOnClickListener { goToHome() }
+        btnSaltar.setOnClickListener { goToLogin() }
     }
 
     private fun loadBanners(): List<Int> {
@@ -125,8 +124,8 @@ class Introduction : AppCompatActivity() {
     private fun dpToPx(dp: Int): Int =
         (dp * resources.displayMetrics.density).toInt()
 
-    private fun goToHome() {
-        startActivity(Intent(this, HomeActivity::class.java))
+    private fun goToLogin() {
+        startActivity(Intent(this, Login::class.java))
         finish()
     }
 }

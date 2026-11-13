@@ -14,8 +14,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.wolop.wallet.Adapters.Home.BenefitsAdapter
 import com.wolop.wallet.R
-import com.wolop.wallet.data.Benefit
-import com.wolop.wallet.data.BenefitMockData
+import com.wolop.wallet.data.mock.Benefit
+import com.wolop.wallet.data.mock.BenefitMockData
 
 class BeneficiosFragment : Fragment() {
 

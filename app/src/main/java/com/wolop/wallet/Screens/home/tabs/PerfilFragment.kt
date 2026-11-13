@@ -10,9 +10,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import com.wolop.wallet.R
-import com.wolop.wallet.data.DatabaseProvider
-import com.wolop.wallet.data.HomeMockData
-import com.wolop.wallet.data.HomeUser
+import com.wolop.wallet.data.mock.HomeMockData
+import com.wolop.wallet.data.repository.DatabaseProvider
+import com.wolop.wallet.data.mock.HomeUser
 import com.wolop.wallet.data.session.SessionManager
 import com.wolop.wallet.screens.Welcome
 import kotlinx.coroutines.launch

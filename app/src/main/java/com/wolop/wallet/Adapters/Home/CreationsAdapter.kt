@@ -6,7 +6,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.wolop.wallet.R
-import com.wolop.wallet.data.Creation
+import com.wolop.wallet.data.mock.Creation
 
 class CreationsAdapter(
     private val creations: List<Creation>
@@ -14,7 +14,7 @@ class CreationsAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreationViewHolder {
         val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_creation, parent, false)
+            .inflate(R.layout.item_creacion, parent, false)
         return CreationViewHolder(view)
     }
 
