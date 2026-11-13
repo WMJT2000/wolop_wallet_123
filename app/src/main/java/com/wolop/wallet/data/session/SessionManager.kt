@@ -14,7 +14,7 @@ class SessionManager(context: Context) {
             .putInt(KEY_USER_ID, id)
             .putString(KEY_CORREO, correo)
             .putString(KEY_NOMBRE, nombre)
-            .apply()
+            .commit()
     }
 
     fun estaLogueado(): Boolean =
@@ -27,7 +27,7 @@ class SessionManager(context: Context) {
     fun nombre(): String? = prefs.getString(KEY_NOMBRE, null)
 
     fun cerrarSesion() {
-        prefs.edit().clear().apply()
+        prefs.edit().clear().commit()
     }
 
     private companion object {

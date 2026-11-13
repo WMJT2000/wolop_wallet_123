@@ -32,7 +32,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="Mis beneficios"
             android:textColor="#3B2418"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -64,7 +64,7 @@
                 android:paddingBottom="8dp"
                 android:text="Disponibles"
                 android:textColor="#C1974E"
-                android:textSize="15sp" />
+                android:textSize="19sp" />
 
             <View
                 android:id="@+id/lineaDisponibles"
@@ -91,7 +91,7 @@
                 android:paddingBottom="8dp"
                 android:text="Canjeados"
                 android:textColor="#412939"
-                android:textSize="15sp" />
+                android:textSize="19sp" />
 
             <View
                 android:id="@+id/lineaCanjeados"
@@ -127,7 +127,7 @@
             android:fontFamily="serif"
             android:gravity="center"
             android:textColor="#8A6A55"
-            android:textSize="15sp"
+            android:textSize="19sp"
             android:visibility="gone"
             tools:text="Aún no has canjeado beneficios." />
     </FrameLayout>

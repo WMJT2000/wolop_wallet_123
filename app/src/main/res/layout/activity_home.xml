@@ -65,7 +65,7 @@
                 android:includeFontPadding="false"
                 android:text="Inicio"
                 android:textColor="@color/bottom_nav_item"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -95,7 +95,7 @@
                 android:includeFontPadding="false"
                 android:text="Beneficios"
                 android:textColor="@color/bottom_nav_item"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -125,7 +125,7 @@
                 android:includeFontPadding="false"
                 android:text="QR"
                 android:textColor="@color/bottom_nav_item"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -155,7 +155,7 @@
                 android:includeFontPadding="false"
                 android:text="Menú"
                 android:textColor="@color/bottom_nav_item"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
         </LinearLayout>
 
         <LinearLayout
@@ -185,7 +185,7 @@
                 android:includeFontPadding="false"
                 android:text="Perfil"
                 android:textColor="@color/bottom_nav_item"
-                android:textSize="12sp" />
+                android:textSize="16sp" />
         </LinearLayout>
     </LinearLayout>
 

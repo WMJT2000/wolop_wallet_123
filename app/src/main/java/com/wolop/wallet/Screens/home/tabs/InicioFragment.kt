@@ -20,6 +20,10 @@ import kotlin.math.roundToInt
 
 class InicioFragment : Fragment() {
 
+    companion object {
+        private const val PAGE_SIZE = 3
+    }
+
     private val dots = mutableListOf<View>()
 
     override fun onCreateView(
@@ -79,46 +83,66 @@ class InicioFragment : Fragment() {
             false
         )
         recycler.layoutManager = layoutManager
-        recycler.adapter = CreationsAdapter(creations)
 
-        setupIndicators(indicators, creations.size)
-
-        recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                val position = layoutManager.findFirstVisibleItemPosition()
-                if (position != RecyclerView.NO_POSITION) {
-                    updateIndicators(position)
-                }
+        recycler.post {
+            val density = resources.displayMetrics.density
+            val gapPx = (16 * density).toInt()
+            val defaultWidthPx = (126 * density).toInt()
+            val viewport = recycler.width - recycler.paddingStart - recycler.paddingEnd
+            val itemCount = creations.size
+            // Hasta 3, reparte el viewport (sin scroll); con más de 3, fija 126dp y habilita scroll.
+            val itemWidthPx = if (itemCount <= PAGE_SIZE) {
+                (viewport - (itemCount - 1) * gapPx) / itemCount
+            } else {
+                defaultWidthPx
             }
-        })
+            recycler.adapter = CreationsAdapter(creations, itemWidthPx)
+
+            val pageCount = (creations.size + PAGE_SIZE - 1) / PAGE_SIZE
+            setupIndicators(indicators, pageCount)
+            indicators.isVisible = pageCount > 1
+            updateIndicators(layoutManager, creations.size)
+
+            recycler.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+                override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                    updateIndicators(layoutManager, creations.size)
+                }
+            })
+        }
     }
 
-    private fun setupIndicators(container: LinearLayout, count: Int) {
+    private fun setupIndicators(container: LinearLayout, pageCount: Int) {
         container.removeAllViews()
         dots.clear()
 
         val size = dpToPx(9)
         val margin = dpToPx(4)
-        repeat(count) { index ->
+        repeat(pageCount) {
             val dot = View(requireContext()).apply {
                 layoutParams = LinearLayout.LayoutParams(size, size).apply {
                     marginStart = margin
                     marginEnd = margin
                 }
-                setBackgroundResource(
-                    if (index == 0) R.drawable.bg_indicador_activo
-                    else R.drawable.bg_indicador_inactivo
-                )
+                setBackgroundResource(R.drawable.bg_indicador_activo)
             }
             container.addView(dot)
             dots.add(dot)
         }
     }
 
-    private fun updateIndicators(position: Int) {
-        dots.forEachIndexed { index, dot ->
+    // Un dot se pinta de activo cuando algún elemento de su página está visible.
+    private fun updateIndicators(layoutManager: LinearLayoutManager, itemCount: Int) {
+        if (dots.isEmpty()) return
+        val first = layoutManager.findFirstVisibleItemPosition()
+        val last = layoutManager.findLastVisibleItemPosition()
+        if (first == RecyclerView.NO_POSITION || last == RecyclerView.NO_POSITION) return
+
+        dots.forEachIndexed { page, dot ->
+            val start = page * PAGE_SIZE
+            val end = minOf(start + PAGE_SIZE - 1, itemCount - 1)
+            val active = last >= start && first <= end
             dot.setBackgroundResource(
-                if (index == position) R.drawable.bg_indicador_activo
+                if (active) R.drawable.bg_indicador_activo
                 else R.drawable.bg_indicador_inactivo
             )
         }

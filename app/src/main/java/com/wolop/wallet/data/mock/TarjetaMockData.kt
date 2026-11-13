@@ -20,7 +20,7 @@ object TarjetaMockData {
         estado = "Activo",
         fechaVencimiento = "2026-12-20",
         usoTotal = "No",
-        nombre = "Micaela",
+        nombre = "Wolop",
         obsequio = "2 postres",
         fechaValida = "2028-12-02",
         saldo = "$20",

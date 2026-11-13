@@ -33,7 +33,7 @@
             android:fontFamily="sans-serif-medium"
             android:text="Locales"
             android:textColor="#3B2418"
-            android:textSize="18sp"
+            android:textSize="22sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -54,9 +54,9 @@
             android:layout_height="wrap_content"
             android:clipToPadding="false"
             android:overScrollMode="never"
-            android:paddingStart="18dp"
+            android:paddingStart="20dp"
             android:paddingTop="6dp"
-            android:paddingEnd="18dp"
+            android:paddingEnd="20dp"
             android:paddingBottom="24dp"
             android:scrollbars="none" />
     </androidx.core.widget.NestedScrollView>

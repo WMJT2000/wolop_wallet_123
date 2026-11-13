@@ -22,8 +22,8 @@ data class Creation(
 // Datos simulados para la pantalla de inicio.
 object HomeMockData {
     val user = HomeUser(
-        name = "Micaela",
-        lastName = "Alcocer",
+        name = "Wolop",
+        lastName = "",
         email = "micaela@gmail.com",
         phone = "099 999 9999",
         balance = 0.0,
@@ -35,7 +35,11 @@ object HomeMockData {
     val creations = listOf(
         Creation("Selva negra", R.drawable.img_product2),
         Creation("Tarta de fresas", R.drawable.img_product3),
-        Creation("Tarta de chocolate", R.drawable.img_product4)
+        Creation("Tarta de chocolate", R.drawable.img_product4),
+        Creation("Selva negra grande", R.drawable.img_product1),
+        Creation("Tarta de limón", R.drawable.img_product5),
+        Creation("Tarta de fresas mini", R.drawable.img_product3),
+        Creation("Tarta de chocolate mini", R.drawable.img_product4)
     )
 
     // Mezcla la identidad guardada en Room con los valores visuales del mock.

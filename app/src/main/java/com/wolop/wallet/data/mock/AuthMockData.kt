@@ -7,7 +7,7 @@ object AuthMockData {
     const val CONTRASENA = "wolop123"
 
     // Datos que se guardan en Room la primera vez que se inicia sesión.
-    const val NOMBRE_COMPLETO = "Micaela Alcocer"
+    const val NOMBRE_COMPLETO = "Wolop"
     const val TELEFONO = "099 999 9999"
 
     fun credencialesValidas(correo: String, contrasena: String): Boolean =

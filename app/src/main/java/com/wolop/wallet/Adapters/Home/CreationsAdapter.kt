@@ -9,12 +9,17 @@ import com.wolop.wallet.R
 import com.wolop.wallet.data.mock.Creation
 
 class CreationsAdapter(
-    private val creations: List<Creation>
+    private val creations: List<Creation>,
+    private val itemWidthPx: Int
 ) : RecyclerView.Adapter<CreationsAdapter.CreationViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CreationViewHolder {
         val view = LayoutInflater.from(parent.context)
             .inflate(R.layout.item_creacion, parent, false)
+        val xml = view.layoutParams as? ViewGroup.MarginLayoutParams
+        view.layoutParams = RecyclerView.LayoutParams(itemWidthPx, xml?.height ?: RecyclerView.LayoutParams.WRAP_CONTENT).apply {
+            marginEnd = xml?.marginEnd ?: 0
+        }
         return CreationViewHolder(view)
     }
 

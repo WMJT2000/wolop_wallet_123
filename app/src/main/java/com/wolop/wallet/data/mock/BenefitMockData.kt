@@ -18,7 +18,10 @@ object BenefitMockData {
         Benefit(3, "Tarta individual", 350, R.drawable.icon_benefit1),
         Benefit(4, "Torta individual", 400, R.drawable.icon_benefit4),
         Benefit(5, "Café doble", 300, R.drawable.icon_benefit6, redeemed = true),
-        Benefit(6, "Postre de temporada", 450, R.drawable.icon_benefit5, redeemed = true)
+        Benefit(6, "Postre de temporada", 450, R.drawable.icon_benefit5, redeemed = true),
+        Benefit(7, "Selva negra", 500, R.drawable.img_product2),
+        Benefit(8, "Tarta de fresas", 380, R.drawable.img_product3),
+        Benefit(9, "Tarta de chocolate", 425, R.drawable.img_product4)
     )
 
     fun redeem(benefit: Benefit) {
