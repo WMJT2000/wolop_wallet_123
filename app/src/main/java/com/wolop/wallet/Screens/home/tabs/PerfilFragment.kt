@@ -98,7 +98,7 @@ class PerfilFragment : Fragment() {
                     type = DialogType.QUESTION,
                     title = "Cerrar sesión",
                     message = "¿Deseas cerrar tu sesión? Volverás a la pantalla de inicio.",
-                    positiveText = "Cerrar sesión",
+                    positiveText = "Aceptar",
                     negativeText = "Cancelar"
                 )
             )

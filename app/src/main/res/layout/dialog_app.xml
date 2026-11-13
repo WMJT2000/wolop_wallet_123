@@ -67,16 +67,19 @@
         android:layout_marginTop="16dp"
         android:orientation="horizontal">
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNegativeDialog"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_dialog_button_secondary"
-            app:backgroundTint="@null"
+            app:backgroundTint="#FBF7EF"
+            app:strokeColor="#C9BBA9"
+            app:strokeWidth="1.2dp"
+            app:cornerRadius="26dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:letterSpacing="0.02"
             android:text="Cancelar"
             android:textAllCaps="false"
@@ -89,16 +92,17 @@
             android:layout_width="12dp"
             android:layout_height="1dp" />
 
-        <Button
+        <com.google.android.material.button.MaterialButton
             android:id="@+id/btnPositiveDialog"
             android:layout_width="0dp"
             android:layout_height="52dp"
             android:layout_weight="1"
-            android:background="@drawable/bg_dialog_button_primary"
-            app:backgroundTint="@null"
+            app:backgroundTint="#3E2719"
+            app:cornerRadius="26dp"
             android:fontFamily="sans-serif-medium"
             android:gravity="center"
-            android:includeFontPadding="false"
+            android:maxLines="1"
+            android:ellipsize="end"
             android:letterSpacing="0.02"
             android:text="Aceptar"
             android:textAllCaps="false"
