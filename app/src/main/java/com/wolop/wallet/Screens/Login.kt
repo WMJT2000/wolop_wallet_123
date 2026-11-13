@@ -17,6 +17,9 @@ import com.wolop.wallet.data.repository.DatabaseProvider
 import com.wolop.wallet.data.local.entities.Usuario
 import com.wolop.wallet.data.session.SessionManager
 import com.wolop.wallet.screens.home.HomeActivity
+import com.wolop.wallet.ui.dialogs.DialogConfig
+import com.wolop.wallet.ui.dialogs.DialogManager
+import com.wolop.wallet.ui.dialogs.DialogType
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
@@ -54,7 +57,15 @@ class Login : AppCompatActivity() {
                 return@setOnClickListener
             }
             if (!AuthMockData.credencialesValidas(correo, contrasena)) {
-                layoutContrasena.error = "Correo o contraseña incorrectos"
+                // Credenciales inválidas: se informa con el diálogo de error.
+                DialogManager.show(
+                    supportFragmentManager,
+                    DialogConfig(
+                        type = DialogType.ERROR,
+                        title = "Algo salió mal",
+                        message = "Correo o contraseña incorrectos. Inténtalo nuevamente."
+                    )
+                )
                 return@setOnClickListener
             }
 
@@ -70,6 +81,16 @@ class Login : AppCompatActivity() {
     private fun iniciarSesion(correo: String, btnEntrar: View) {
         btnEntrar.isEnabled = false
         btnEntrar.alpha = 0.6f
+
+        // La validación simulada bloquea la pantalla: se avisa con LOADING.
+        DialogManager.show(
+            supportFragmentManager,
+            DialogConfig(
+                type = DialogType.LOADING,
+                title = "Iniciando sesión",
+                message = "Validando tus datos, espera un momento…"
+            )
+        )
 
         val repository = DatabaseProvider.getUsuarioRepository(this)
 
@@ -104,6 +125,9 @@ class Login : AppCompatActivity() {
 
             SessionManager(this@Login)
                 .guardarSesion(id, correo, AuthMockData.NOMBRE_COMPLETO)
+
+            // La carga terminó: se cierra el LOADING antes de entrar a los tabs.
+            DialogManager.dismissLoading(supportFragmentManager)
 
             startActivity(
                 Intent(this@Login, HomeActivity::class.java).apply {

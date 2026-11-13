@@ -39,6 +39,8 @@ Configuración del módulo en `app/build.gradle.kts` (release usa el DSL `optimi
 - `fragment_*` → tabs y sub-pantallas (fragments).
 - `item_*` → filas/celdas para RecyclerView.
 
+No existen variantes `layout-land/`: una única vista por pantalla. Las pantallas con contenido alto están envueltas en `NestedScrollView` (`fillViewport="true"`, barra de scroll `none`) de modo que en horizontal todo sigue siendo alcanzable con scroll (Welcome, QR, Menú, Contactos, etc.). Welcome es una columna centrada; Menú apila sus tarjetas desde arriba (ya sin centrado vertical por pesos).
+
 ```
 WolopWallet/
 ├── .git/
@@ -60,11 +62,18 @@ WolopWallet/
 └── app/
     ├── build.gradle.kts          # config del módulo
     └── src/main/
-        ├── AndroidManifest.xml   # MainActivity LAUNCHER + Welcome/Login/Register/Introduction/HomeActivity
+        ├── AndroidManifest.xml   # MainActivity LAUNCHER + Welcome/Login/Register/Introduction/HomeActivity + DemoDialogsActivity
         ├── keepRules/rules.keep  # reglas R8 (se combinan todas las .keep del directorio)
         ├── assets/               # 36 PNG duplicados de res/drawable — NO se usan desde código; editar res/drawable
         └── java/com/wolop/wallet/
             ├── MainActivity.kt               # launcher redirect-only (no infla layout)
+            ├── ui/
+            │   └── dialogs/                  # sistema de diálogos unificado (ver §4.5)
+            │       ├── AppDialogFragment.kt  # DialogFragment + Fragment Result API
+            │       ├── DialogManager.kt      # singleton-ish manager: show() + dismissLoading()
+            │       ├── DialogConfig.kt       # modelo: type, title, message, positiveText, negativeText
+            │       ├── DialogType.kt         # SUCCESS / ERROR / ALERT / QUESTION / LOADING
+            │       └── GifLoadingView.kt     # View propia que reproduce icon_alert_loading.gif (fallback: arco)
             ├── Adapters/                     # carpetas capitalizadas, paquetes "com.wolop.wallet.Adapters.*"
             │   ├── Home/BenefitsAdapter.kt
             │   ├── Home/CreationsAdapter.kt
@@ -72,6 +81,7 @@ WolopWallet/
             │   └── Introduction/IntroductionAdapter.kt
             ├── Screens/                      # carpeta capitalizada, paquete minúscula "…screens…"
             │   ├── Welcome.kt
+            │   ├── DemoDialogsActivity.kt    # pantalla de demostración de diálogos (exported=true)
             │   ├── Introduction.kt           # onboarding (ViewPager2 + banners + indicadores)
             │   ├── Login.kt
             │   ├── Register.kt
@@ -109,7 +119,7 @@ WolopWallet/
 
 Recursos en `app/src/main/res/`: `color/bottom_nav_item.xml`, `drawable/` (XML shapes `bg_*`/`icon_*` + PNG), `drawable-nodpi/fondo_tarjeta_marble.png`, `layout/` (ver §5), `menu/bottom_nav_home.xml` (**sin uso**, la bottom bar es manual), `mipmap*` (launcher), `values/{strings,colors,themes}.xml`, `values-night/themes.xml`, `xml/{backup_rules,data_extraction_rules}.xml`.
 
-Estado de `res/` actual relevante: 68 archivos en `drawable/` (incluye `bg_circle_siguiente.xml`, el círculo blanco del botón "Siguiente" de Introduction) frente a 36 en `assets/`, todos duplicados de drawable y **no referenciados desde código**.
+Estado de `res/` actual relevante: 71 archivos en `drawable/` (incluye `bg_circle_siguiente.xml`, el círculo blanco del botón "Siguiente" de Introduction, y los `bg_dialog_app.xml` / `bg_dialog_button_primary.xml` / `bg_dialog_button_secondary.xml` del sistema de diálogos) frente a 36 en `assets/`, todos duplicados de drawable y **no referenciados desde código**.
 
 ---
 
@@ -191,6 +201,16 @@ Notas:
 
 Estado conocido: `QrFragment` aún genera `"WolopWallet:123456"` hardcodeado a 600 px `CLASSIC`, con `setBackgroundColor(Color.LTGRAY)` de depuración y log `QR_TEST` — scaffold a reemplazar por el id de sesión + paleta `#F8F2ED` / `#3B2418`.
 
+### 4.5 Sistema de diálogos (`ui/dialogs/`)
+
+DialogFragment único (`AppDialogFragment`) + `DialogManager.show(fm, config)` + **Fragment Result API** (`AppDialogFragment.REQUEST_KEY`, azioni `POSITIVE` / `NEGATIVE` / `DISMISSED`). NO callbacks directos ni singletons con Activities.
+
+- **`dialog_app.xml`**: diseño único por tipo (icon circular 84dp, título serif bold, mensaje, divider dorado, botones pill; LOADING no tiene botones ni divider).
+- **Tipos**: `SUCCESS` / `ERROR` / `ALERT` (un botón), `QUESTION` (Cancelar + Aceptar), `LOADING` (GIF animado, sin botones, cerrado por código vía `DialogManager.dismissLoading()`).
+- Cancelar/afuera/back NO cierran. Botones se deshabilitan tras el primer toque.
+
+**Fuera de esta capa:** reglas de negocio (no deciden qué pasa), lógica de Room/red, estado global. `DemoDialogsActivity` es la pantalla de prueba (sin integración a lógica real).
+
 ---
 
 ## 5. Pantallas y layouts
@@ -212,6 +232,8 @@ Los layouts viven planos en `app/src/main/res/layout/`. IDs son camelCase en esp
 | `fragment_tarjeta.xml` | Tarjeta (sub) | `imgIdTarjeta`, `txtEstadoValor`, `imgCodigoTarjeta`, `txtSaldoValor` |
 | `fragment_locales.xml` | Locales (sub) | `recyclerLocales` (`item_local.xml`) |
 | `fragment_contactos.xml` | Contactos (sub) | placeholder "Hola" |
+| `dialog_app.xml` | `AppDialogFragment` | `txtTituloDialog`, `txtMensajeDialog`, `imgIconDialog`, `gifIconoCarga`, `btnPositiveDialog`, `btnNegativeDialog` |
+| `activity_demo_dialogs.xml` | `DemoDialogsActivity` | 5 cards de diálogo + `txtResultadoDemo` |
 | `item_introduction_banner.xml` | página del ViewPager de Introduction | imagen + claim |
 
 Drawables XML de ejemplo (patrón a imitar al crear shapes): `bg_circle_gold.xml` (óvalo `#FAF5EF` + stroke `#C0964E`), `bg_avatar_circulo.xml`, `bg_indicador_activo.xml` (óvalo `#C99A48`, 9 dp), `bg_boton_canjear.xml`, `bg_pill_*.xml`, `bg_circle_siguiente.xml` (botón blanco de Introduction). Iconos vectoriales de entrada de texto: `icon_*_input.xml`.
@@ -329,6 +351,9 @@ Notas: `exec-out screencap > archivo.png` en PowerShell corrompe el binario (lo 
 | Cambiar textos de cualquier pantalla | el `fragment_*.xml`/`screen_*.xml` dueño del ID — **no** crees entries en `strings.xml` |
 | Nueva sub-pantalla desde Menú | nuevo `fragment_x.xml` + `XFragment.kt` en `Screens/home/tabs/` + `abrirSubPantalla()` en `MenuFragment.kt` + `addToBackStack` ya lo da HomeActivity |
 | Cambiar estilo del QR | `data/qr/QRConfig.kt` / `QRStyle.kt` / `QRGenerator.kt` + `QrFragment.kt` |
+| Cambiar diseño/colores de un diálogo | `res/layout/dialog_app.xml` + `res/drawable/bg_dialog_*.xml` |
+| Añadir/ajustar un diálogo | `ui/dialogs/AppDialogFragment.kt` + `DialogManager.kt` + `DialogConfig/DialogType/…` |
+| Probar diálogos | `DemoDialogsActivity` (`.screens.DemoDialogsActivity`) |
 | Reglas de ofuscación release | `app/src/main/keepRules/*.keep` |
 
 ---

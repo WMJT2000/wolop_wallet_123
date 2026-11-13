@@ -1,88 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/fondo_principal"
+    android:orientation="vertical"
     tools:context=".screens.Welcome">
 
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
+        android:fillViewport="true"
+        android:overScrollMode="never"
+        android:scrollbars="none">
 
-    <ImageView
-        android:id="@+id/imgLogo"
-        android:layout_width="250dp"
-        android:layout_height="180dp"
-        android:src="@drawable/icon_principal"
-        android:scaleType="fitCenter"
-        android:adjustViewBounds="true"
-        android:contentDescription="Logo GEMMA"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintVertical_bias="0.40"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:orientation="vertical"
+            android:paddingStart="24dp"
+            android:paddingEnd="24dp">
 
-    <TextView
-        android:id="@+id/txtFrase"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="82dp"
-        android:text="La dolce experiencia"
-        android:textColor="#623D32"
-        android:textSize="22sp"
-        android:textStyle="italic"
-        android:fontFamily="serif"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        app:layout_constraintTop_toBottomOf="@id/imgLogo"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.15" />
 
+            <ImageView
+                android:id="@+id/imgLogo"
+                android:layout_width="250dp"
+                android:layout_height="180dp"
+                android:adjustViewBounds="true"
+                android:contentDescription="Logo GEMMA"
+                android:scaleType="fitCenter"
+                android:src="@drawable/icon_principal" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/btnEntrar"
-        android:layout_width="0dp"
-        android:layout_height="57dp"
-        android:layout_marginStart="72dp"
-        android:layout_marginEnd="72dp"
-        android:layout_marginBottom="126dp"
-        android:text="ENTRAR"
-        android:textAllCaps="false"
-        android:textColor="#FFFFFF"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:padding="0dp"
-        android:elevation="0dp"
-        android:stateListAnimator="@null"
-        app:backgroundTint="#3E2719"
-        app:cornerRadius="50dp"
-        app:strokeWidth="0dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <TextView
+                android:id="@+id/txtFrase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="34dp"
+                android:fontFamily="serif"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="La dolce experiencia"
+                android:textColor="#623D32"
+                android:textSize="22sp"
+                android:textStyle="italic" />
 
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1.4" />
 
-    <TextView
-        android:id="@+id/btnCrearCuenta"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:layout_marginTop="8dp"
-        android:text="CREAR CUENTA"
-        android:textAllCaps="true"
-        android:textColor="#CB9238"
-        android:textSize="12sp"
-        android:textStyle="bold"
-        android:fontFamily="sans-serif-medium"
-        android:gravity="center"
-        android:includeFontPadding="false"
-        android:clickable="true"
-        android:focusable="true"
-        app:layout_constraintTop_toBottomOf="@id/btnEntrar"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/btnEntrar"
+                android:layout_width="265dp"
+                android:layout_height="52dp"
+                android:gravity="center"
+                android:elevation="0dp"
+                android:fontFamily="sans-serif-medium"
+                android:padding="0dp"
+                android:stateListAnimator="@null"
+                android:text="ENTRAR"
+                android:textAllCaps="false"
+                android:textColor="#FFFFFF"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                app:backgroundTint="#3E2719"
+                app:cornerRadius="50dp"
+                app:strokeWidth="0dp" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/btnCrearCuenta"
+                android:layout_width="wrap_content"
+                android:layout_height="48dp"
+                android:layout_marginTop="10dp"
+                android:clickable="true"
+                android:focusable="true"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="CREAR CUENTA"
+                android:textAllCaps="true"
+                android:textColor="#CB9238"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
+    </androidx.core.widget.NestedScrollView>
+</LinearLayout>

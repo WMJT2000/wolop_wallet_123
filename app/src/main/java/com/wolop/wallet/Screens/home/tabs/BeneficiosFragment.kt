@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -16,6 +15,9 @@ import com.wolop.wallet.Adapters.Home.BenefitsAdapter
 import com.wolop.wallet.R
 import com.wolop.wallet.data.mock.Benefit
 import com.wolop.wallet.data.mock.BenefitMockData
+import com.wolop.wallet.ui.dialogs.DialogConfig
+import com.wolop.wallet.ui.dialogs.DialogManager
+import com.wolop.wallet.ui.dialogs.DialogType
 
 class BeneficiosFragment : Fragment() {
 
@@ -90,7 +92,14 @@ class BeneficiosFragment : Fragment() {
 
     private fun canjear(benefit: Benefit) {
         BenefitMockData.redeem(benefit)
-        Toast.makeText(requireContext(), "Canjeaste: ${benefit.name}", Toast.LENGTH_SHORT).show()
+        DialogManager.show(
+            parentFragmentManager,
+            DialogConfig(
+                type = DialogType.SUCCESS,
+                title = "Beneficio canjeado",
+                message = "Canjeaste: ${benefit.name}"
+            )
+        )
         loadBenefits()
     }
 }

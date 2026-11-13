@@ -15,6 +15,10 @@ import com.wolop.wallet.data.repository.DatabaseProvider
 import com.wolop.wallet.data.mock.HomeUser
 import com.wolop.wallet.data.session.SessionManager
 import com.wolop.wallet.screens.Welcome
+import com.wolop.wallet.ui.dialogs.AppDialogFragment
+import com.wolop.wallet.ui.dialogs.DialogConfig
+import com.wolop.wallet.ui.dialogs.DialogManager
+import com.wolop.wallet.ui.dialogs.DialogType
 import kotlinx.coroutines.launch
 
 class PerfilFragment : Fragment() {
@@ -37,6 +41,16 @@ class PerfilFragment : Fragment() {
         bind(HomeMockData.user)
         cargarIdentidad()
         setupAcciones(view)
+
+        // Resultado del diálogo de confirmación (cerrar sesión).
+        parentFragmentManager.setFragmentResultListener(
+            AppDialogFragment.REQUEST_KEY,
+            viewLifecycleOwner
+        ) { _, bundle ->
+            if (bundle.getString(AppDialogFragment.KEY_ACTION) == AppDialogFragment.ACTION_POSITIVE) {
+                cerrarSesion()
+            }
+        }
     }
 
     override fun onDestroyView() {
@@ -78,7 +92,16 @@ class PerfilFragment : Fragment() {
         }
 
         view.findViewById<View>(R.id.filaCerrarSesion).setOnClickListener {
-            cerrarSesion()
+            DialogManager.show(
+                parentFragmentManager,
+                DialogConfig(
+                    type = DialogType.QUESTION,
+                    title = "Cerrar sesión",
+                    message = "¿Deseas cerrar tu sesión? Volverás a la pantalla de inicio.",
+                    positiveText = "Cerrar sesión",
+                    negativeText = "Cancelar"
+                )
+            )
         }
     }
 

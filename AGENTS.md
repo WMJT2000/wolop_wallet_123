@@ -12,6 +12,19 @@
 - Navigation is manual `Intent`/`finish()` calls, not Navigation Component. `Register` sends users back to `Login`.
 - Every activity calls `enableEdgeToEdge()` and applies system-bar insets to the root view `R.id.main`. A new activity layout must use `android:id="@+id/main"` or that listener fails.
 
+## Layout notes
+- No hay variantes `layout-land/`: una sola vista por pantalla (`res/layout/` plano). Las pantallas con mucho contenido vertical están envueltas en `NestedScrollView` (`fillViewport="true"`, scroll `none`) para que en horizontal sigan siendo alcanzables (Welcome, QR, Menú, Contactos, etc.).
+- `screen_welcome.xml` es una columna centrada con padding adaptado (logo/phrase/botón). `Menú`: cards `64dp` + pie de políticas; portrait ahora apila desde arriba.
+- Al probar en horizontal con adb: `settings put system user_rotation 1` (y `0` para portrait) + `accelerometer_rotation 0`; restaurar `accelerometer_rotation 1` al terminar.
+
+## Dialog system (new — `ui/dialogs/`)
+- Un solo `AppDialogFragment` + `DialogManager.show(fm, DialogConfig)` + **Fragment Result API** (`REQUEST_KEY = "wolop_dialog_result"`, acciones `POSITIVE` / `NEGATIVE` / `DISMISSED`). Sin callbacks directos ni singletons con Activities.
+- Tipos: `SUCCESS` / `ERROR` / `ALERT` (un botón) · `QUESTION` (Cancelar + Aceptar) · `LOADING` (GIF animado, sin botones, cerrado por código vía `DialogManager.dismissLoading(fm)`).
+- `dialog_app.xml`: icon 84dp, título serif bold, mensaje, divider dorado, botones pill; LOADING no tiene botones ni divider.
+- Back y toque exterior NO cierran. Botones se deshabilitan tras el primer toque.
+- `DemoDialogsActivity` es la pantalla de prueba (no conectada a lógica real); lanzarla con `adb shell am start -n com.wolop.wallet/.screens.DemoDialogsActivity`.
+- No se toca lógica de negocio existente ni assets/iconos de alerta.
+
 ## Local data (Room)
 - Persistence is Room `2.8.5` (`room-runtime` + `room-ktx`) with `room-compiler` run through KSP (`com.google.devtools.ksp` `2.3.12`); versions come from `libs.versions.toml`. There is no DI framework, no repository interface, and no network layer.
 - Layering: `data/local/entities/Usuario.kt` -> `data/local/dao/UsuarioDao.kt` -> `data/local/AppDatabase.kt` -> `data/repository/UsuarioRepository.kt`, exposed through the `data/repository/DatabaseProvider.kt` factory.
@@ -54,6 +67,8 @@
 - `fragment_tarjeta.xml` — sub-pantalla Tarjeta (`imgIdTarjeta`, `txtEstadoValor`, `imgCodigoTarjeta`, `txtSaldoValor`).
 - `fragment_locales.xml` — sub-pantalla Locales (`recyclerLocales`).
 - `fragment_contactos.xml` — sub-pantalla Contactos (placeholder "Hola").
+- `dialog_app.xml` — diseño único del diálogo GEMMA (`txtTituloDialog`, `txtMensajeDialog`, `imgIconDialog`, `gifIconoCarga`, `btnPositiveDialog`, `btnNegativeDialog`).
+- `activity_demo_dialogs.xml` — pantalla de demostración de diálogos (`/screens.DemoDialogsActivity`).
 - `item_beneficio.xml` — fila de Beneficios; `item_creacion.xml` — card de creaciones (Inicio); `item_local.xml` — tarjeta de una tienda (Locales); `item_introduction_banner.xml` — página del onboarding.
 
 ## Source/resource quirks
